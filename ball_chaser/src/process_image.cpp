@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 	ros::NodeHandle n;
 	
 	// Client definition
-	client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command");
+	client = n.serviceClient<ball_chaser::DriveToTarget>("/ball_chaser/command_robot");
 	
 	// Subscriber to image
 	ros::Subscriber sub = n.subscribe("/camera/rgb/image_raw", 10,  process_image_callback);

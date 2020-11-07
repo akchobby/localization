@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     
 
     // Define a safe_move service with a handle_safe_move_request callback function
-    ros::ServiceServer service = n.advertiseService("/ball_chaser/command", handle_drive_request);
+    ros::ServiceServer service = n.advertiseService("/ball_chaser/command_robot", handle_drive_request);
     ROS_INFO("Ready to send robot commands");
 
     // Handle ROS communication events
