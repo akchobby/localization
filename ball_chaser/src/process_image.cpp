@@ -44,17 +44,17 @@ void process_image_callback(const sensor_msgs::Image img)
 			if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3))
 			{
 				 ROS_INFO("Ball in the Left");
-				 drive_robot(0.25,0.5);
+				 drive_robot(0.7, 1.5);
 			}
 			else if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3)*2)
 			{
-				ROS_INFO("Ball in the straight ahead");
-				drive_robot(0.25, 0.0);
+				ROS_INFO("Ball straight ahead");
+				drive_robot(0.7, 0.0);
 			}
 			else
 			{
 				ROS_INFO("Ball in the right");
-				drive_robot(0.25, -0.5);
+				drive_robot(0.7, -1.5);
 			}
 	}
 	else
