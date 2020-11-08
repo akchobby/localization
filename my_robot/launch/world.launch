@@ -30,5 +30,5 @@
               -x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"/>
 
-	<node name="rviz" pkg="rviz" type="rviz" respawn="false"/>
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find my_robot)/rviz/config_file.rviz" respawn="false"/>
 </launch>

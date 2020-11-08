@@ -28,7 +28,7 @@ void process_image_callback(const sensor_msgs::Image img)
 	bool found =  false;
 	int index = 0;
 	 
-	for(int i = 0; i<img.width*img.height;i++)
+	for(int i = 0; i<img.width*img.height;i+=3)
 	{
 		// Detection of white, Note the ball has to be very close to the camera for detection.
 		if (img.data[i]  == white_pixel && img.data[i+1]  == white_pixel && img.data[i+2]  == white_pixel )
@@ -44,17 +44,17 @@ void process_image_callback(const sensor_msgs::Image img)
 			if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3))
 			{
 				 ROS_INFO("Ball in the Left");
-				 drive_robot(0.7, 1.5);
+				 drive_robot(0.5, 1.5);
 			}
 			else if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3)*2)
 			{
 				ROS_INFO("Ball straight ahead");
-				drive_robot(0.7, 0.0);
+				drive_robot(0.5, 0.0);
 			}
 			else
 			{
 				ROS_INFO("Ball in the right");
-				drive_robot(0.7, -1.5);
+				drive_robot(0.5, -1.5);
 			}
 	}
 	else
