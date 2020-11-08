@@ -25,37 +25,48 @@ void drive_robot(float lin_x, float ang_z)
 void process_image_callback(const sensor_msgs::Image img)
 {
 	int white_pixel = 255;
-	bool found =  false;
-	int index = 0;
+	int x_center_val = 0;
+	int x_val_sum = 0;
+	int mass = 0;
+	float kp = 0.01; // proportional gain
 	 
-	for(int i = 0; i<img.width*img.height;i+=3)
+	for(int i = 0; i < img.height; i++)
 	{
-		// Detection of white, Note the ball has to be very close to the camera for detection.
-		if (img.data[i]  == white_pixel && img.data[i+1]  == white_pixel && img.data[i+2]  == white_pixel )
+		for(int j = 0; j < img.step; j+=3)
 		{
-			found = true;
-			index = i;
-			break;
+			int pixel_index = (i * img.step) + j;
+			
+			// Detection of white,
+			if (img.data[pixel_index]  == white_pixel && img.data[pixel_index+1]  == white_pixel && img.data[pixel_index+2]  == white_pixel )
+			{
+				x_val_sum +=  (j / 3);
+				mass++;
+			}
 		}
 	}
-	if (found)
+	
+
+	if (mass > 0)
 	{
-				// dividing  image into 3 sections 
-			if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3))
+			x_center_val = x_val_sum /  mass;
+			int side = (img.width / 2) - x_center_val; 
+
+			// dividing  image into 3 sections 
+			if(side > 0)
 			{
 				 ROS_INFO("Ball in the Left");
-				 drive_robot(0.5, 1.5);
 			}
-			else if(std::abs(index - ((int)(index /img.width) * (int)(img.width))) < (img.width/3)*2)
+			else if(side < 0 )
 			{
-				ROS_INFO("Ball straight ahead");
-				drive_robot(0.5, 0.0);
+				ROS_INFO("Ball in the right");
 			}
 			else
 			{
-				ROS_INFO("Ball in the right");
-				drive_robot(0.5, -1.5);
+				ROS_INFO("Ball straight ahead");
 			}
+			
+			drive_robot(0.3, ((float) side) * kp);
+			
 	}
 	else
 	{
