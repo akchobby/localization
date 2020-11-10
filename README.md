@@ -31,7 +31,7 @@ cd localization
 git lfs install 
 git lfs pull
 ```
-* Now Catkin make the this repo and launch it as shown:
+* Now Catkin make the repo and launch it as shown:
 
 ```bash
 roslaunch my_robot amcl.launch
