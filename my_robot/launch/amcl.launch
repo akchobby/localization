@@ -45,10 +45,29 @@
 		<param name="odom_model_type" value="diff-corrected"/>
 		<param name="base_frame_id" value="robot_footprint"/>	
 		<param name="global_frame_id" value="map"/>
+
+		<!-- Fliter params -->
+		<param name="max_particles" value="4500"/>
+		<param name="update_min_d" value="0.1"/>
+		<param name="update_min_a" value="pi/18.0"/>
+		<param name="transform_tolerance" value="0.2"/>	
+		
+		<!-- Laser params -->
+		<param name="laser_max_beams" value="15"/>
+		<param name="laser_z_hit" value="0.99"/>
+		<param name="laser_z_short" value="0.05"/>
+		<param name="laser_likelihood_max_dist" value="3.0"/>
+		
+		<!-- Odom params -->
+		<param name="odom_alpha1" value="0.005"/>
+		<param name="odom_alpha2" value="0.005"/>
+		<param name="odom_alpha3" value="0.005"/>
+		<param name="odom_alpha4" value="0.005"/>
+
+		<!-- initial pose estimate -->
 		<param name="initial_pose_x" value="2.793"/>
 		<param name="initial_pose_y" value="-1.906"/>
 		<param name="initial_pose_a" value="1.57"/>
-		<param name="transform_tolerance" value="0.2"/>		
 	</node>
 
 	<!-- move base-->
