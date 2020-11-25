@@ -1,1 +1,0 @@
-my_robot/maps/map.pgm filter=lfs diff=lfs merge=lfs -text
